@@ -2,6 +2,7 @@ package cn.tangsu99.fspauth;
 
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.connection.LoginEvent;
+import com.velocitypowered.api.event.connection.PostLoginEvent;
 import com.velocitypowered.api.event.connection.PreLoginEvent;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -35,11 +36,10 @@ public class loginEvent {
     }
 
     @Subscribe
-    public void onJoin(LoginEvent event) {
-        var name = event.getPlayer().getUsername();
-        if (msg.containsKey(name)) {
-            event.getPlayer().sendMessage(Component.text(msg.get(name)));
-            msg.remove(name);
+    public void onPostLogin(PostLoginEvent event) {
+        var player = event.getPlayer();
+        if (msg.containsKey(player.getUsername())) {
+            player.sendMessage(Component.text(msg.get(player.getUsername())));
         }
     }
 }
