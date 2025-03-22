@@ -34,6 +34,7 @@ public class FSP_Auth {
     public void onProxyInitialization(ProxyInitializeEvent event) {
         AuthCommand.register(proxy);
         logger.info("FSP-Auth registered");
+        proxy.getEventManager().register(this, new loginEvent());
     }
 
     public static FSP_Auth getInstance() {

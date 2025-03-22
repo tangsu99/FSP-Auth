@@ -20,7 +20,10 @@ public class AuthCommand {
                                             context.getSource().sendMessage(Component.text("Registering..."));
                                             Player player = (Player) context.getSource();
                                             var p = player.getGameProfile();
-                                            context.getSource().sendMessage(Component.text(API.register(p.getName(), "123", p.getId().toString())));
+                                            context.getSource().sendMessage(Component.text(
+                                                    API.register(p.getName(), "123", p.getId().toString())
+                                                            .get("desc").getAsString()
+                                            ));
                                             return 1;
                                         })
                                 )
