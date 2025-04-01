@@ -32,7 +32,7 @@ public class FSP_Auth {
 
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event) {
-        AuthCommand.register(proxy);
+//        AuthCommand.register(proxy);
         logger.info("FSP-Auth registered");
         proxy.getEventManager().register(this, new loginEvent());
     }

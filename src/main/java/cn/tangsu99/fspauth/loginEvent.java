@@ -26,9 +26,14 @@ public class loginEvent {
             }else if (code == 2) {
                 logger.info("放行{}; {}", event.getUsername(), desc);
                 msg.put(event.getUsername(), desc);
-            }else if (result.get("code").getAsInt() == 1) {
-                event.setResult(PreLoginEvent.PreLoginComponentResult.denied(Component.text(config.node("kick-msg").getString()).color(NamedTextColor.RED)));
+            }else if (code == 1) {
+                event.setResult(PreLoginEvent.PreLoginComponentResult
+                        .denied(Component.text(config.node("kick-msg").getString()).color(NamedTextColor.RED)));
                 logger.info("无白名单玩家{}尝试加入! ", event.getUsername());
+            }else if (code == 3) {
+                event.setResult(PreLoginEvent.PreLoginComponentResult
+                        .denied(Component.text(desc).color(NamedTextColor.RED)));
+                logger.info("玩家 {} {}! ", event.getUsername(), desc);
             }
         } else {
             logger.info("请求出错");
