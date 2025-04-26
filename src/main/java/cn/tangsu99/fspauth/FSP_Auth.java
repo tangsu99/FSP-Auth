@@ -17,22 +17,22 @@ import java.nio.file.Path;
         version = BuildConstants.VERSION
 )
 public class FSP_Auth {
-    @Inject
-    private Logger logger;
     private static FSP_Auth instance;
     private final ProxyServer proxy;
+    private final Logger logger;
     private final ConfigurationNode config;
 
     @Inject
-    public FSP_Auth(ProxyServer proxy, @DataDirectory Path dataDirectory) {
+    public FSP_Auth(ProxyServer proxy, Logger logger, @DataDirectory Path dataDirectory) {
         this.proxy = proxy;
+        this.logger = logger;
         instance = this;
         config = new Config(dataDirectory).loadConfig();
     }
 
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event) {
-        AuthCommand.register(proxy);
+//        AuthCommand.register(proxy);
         logger.info("FSP-Auth registered");
         proxy.getEventManager().register(this, new loginEvent());
     }
