@@ -1,7 +1,6 @@
 package cn.tangsu99.fspauth;
 
 import com.velocitypowered.api.event.Subscribe;
-import com.velocitypowered.api.event.connection.LoginEvent;
 import com.velocitypowered.api.event.connection.PostLoginEvent;
 import com.velocitypowered.api.event.connection.PreLoginEvent;
 import net.kyori.adventure.text.Component;
@@ -31,7 +30,8 @@ public class loginEvent {
                 logger.info("无白名单玩家{}尝试加入! ", event.getUsername());
             }
         } else {
-            logger.info("请求出错");
+            event.setResult(PreLoginEvent.PreLoginComponentResult.denied(Component.text("认证服务器出现错误！").color(NamedTextColor.YELLOW)));
+            logger.info("认证服务器出现错误！玩家{}尝试加入! ", event.getUsername());
         }
     }
 
