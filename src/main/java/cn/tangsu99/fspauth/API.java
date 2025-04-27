@@ -34,10 +34,8 @@ public class API {
         HttpResponse<String> response;
         try {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+        } catch (IOException | InterruptedException e) {
+            return null;
         }
         if (response.statusCode() == 200) {
             Gson gson = new GsonBuilder().create();
